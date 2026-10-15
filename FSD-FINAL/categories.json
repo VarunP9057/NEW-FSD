@@ -1,0 +1,11 @@
+{
+  "categories": [
+    { "id": "pharmacy", "label": "Pharmacy", "icon": "💊", "tag": "amenity", "value": "pharmacy" },
+    { "id": "hospital", "label": "Hospital / Clinic", "icon": "🏥", "tag": "amenity", "value": "hospital|clinic" },
+    { "id": "atm", "label": "ATM", "icon": "🏧", "tag": "amenity", "value": "atm" },
+    { "id": "restaurant", "label": "Food", "icon": "🍽️", "tag": "amenity", "value": "restaurant|cafe|fast_food" },
+    { "id": "supermarket", "label": "Grocery", "icon": "🛒", "tag": "shop", "value": "supermarket|convenience" },
+    { "id": "bus", "label": "Bus stop", "icon": "🚌", "tag": "highway", "value": "bus_stop" },
+    { "id": "police", "label": "Police", "icon": "🚓", "tag": "amenity", "value": "police" }
+  ]
+}

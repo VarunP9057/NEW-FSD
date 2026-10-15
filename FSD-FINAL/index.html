@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Essentials Nearby – OpenStreetMap helper for newcomers</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-800">
+  <header class="bg-emerald-700 text-white">
+    <div class="max-w-6xl mx-auto px-4 py-4">
+      <h1 class="text-2xl font-bold">Essentials Nearby</h1>
+      <p class="text-emerald-100 text-sm">New in town? Find the closest pharmacy, ATM, hospital, food and more, ranked by distance. Data © OpenStreetMap contributors.</p>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-6 grid gap-6 lg:grid-cols-5">
+    <!-- LEFT: form + results -->
+    <section class="lg:col-span-2 space-y-4">
+      <form id="searchForm" novalidate class="bg-white rounded-xl shadow p-4 space-y-4">
+        <div>
+          <label for="place" class="block text-sm font-semibold mb-1">Where are you? (area, address or landmark)</label>
+          <div class="flex gap-2">
+            <input id="place" name="place" type="text" autocomplete="off" placeholder="e.g. Indiranagar, Bengaluru"
+              class="flex-1 border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500" aria-describedby="placeError" />
+            <button type="button" id="locBtn" class="border rounded-lg px-3 py-2 text-sm hover:bg-slate-100" title="Use my current location">📍 Me</button>
+          </div>
+          <p id="placeError" class="text-sm text-red-600 mt-1 hidden" role="alert"></p>
+        </div>
+
+        <div>
+          <label for="radius" class="block text-sm font-semibold mb-1">Search radius: <span id="radiusLabel">1000 m</span></label>
+          <input id="radius" type="range" min="200" max="5000" step="100" value="1000" class="w-full accent-emerald-600" />
+          <p id="radiusError" class="text-sm text-red-600 mt-1 hidden" role="alert"></p>
+        </div>
+
+        <fieldset>
+          <legend class="text-sm font-semibold mb-1">What do you need?</legend>
+          <div id="categoryBox" class="flex flex-wrap gap-2" aria-live="polite">
+            <span class="text-sm text-slate-500">Loading categories…</span>
+          </div>
+          <p id="catError" class="text-sm text-red-600 mt-1 hidden" role="alert"></p>
+        </fieldset>
+
+        <button id="submitBtn" type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg py-2 disabled:opacity-60">Find essentials</button>
+      </form>
+
+      <div id="status" class="text-sm" role="status" aria-live="polite"></div>
+
+      <div class="flex items-center justify-between">
+        <h2 class="font-semibold">Results</h2>
+        <label class="text-sm flex items-center gap-2">Sort
+          <select id="sortSel" class="border rounded px-2 py-1">
+            <option value="distance">Nearest first</option>
+            <option value="name">Name A–Z</option>
+          </select>
+        </label>
+      </div>
+      <ul id="results" class="space-y-2"></ul>
+
+      <div class="bg-white rounded-xl shadow p-4">
+        <div class="flex items-center justify-between mb-2">
+          <h2 class="font-semibold">My shortlist <span id="savedCount" class="text-xs text-slate-500"></span></h2>
+          <button id="clearSaved" type="button" class="text-xs text-red-600 hover:underline">Clear</button>
+        </div>
+        <ul id="saved" class="space-y-1 text-sm"></ul>
+      </div>
+    </section>
+
+    <!-- RIGHT: map -->
+    <section class="lg:col-span-3">
+      <div id="map" class="h-[360px] lg:h-[calc(100vh-180px)] lg:sticky lg:top-4 rounded-xl shadow z-0"></div>
+    </section>
+  </main>
+
+  <footer class="text-center text-xs text-slate-500 py-6">
+    Built for CIE case study · Geocoding: Nominatim · Places: Overpass API · Map: OpenStreetMap
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
